@@ -1,0 +1,32 @@
+{
+  "name": "meanstack",
+  "version": "1.0.0",
+  "description": "MEANStack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "raswi",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.1",
+    "mongoose": "^5.2.5",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "nodemailer": "^4.6.4",
+    "nodemon": "^1.18.3",
+    "password-hash": "^1.2.2",
+    "sequelize": "^4.37.6",
+    "stripe": "^6.1.1",
+    "uniqid": "^4.1.1"
+  },
+  "devDependencies": {}
+}

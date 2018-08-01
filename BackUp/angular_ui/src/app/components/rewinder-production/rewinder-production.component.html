@@ -1,0 +1,357 @@
+<div class="full-width">
+  <div class="half-width">
+    <h1>Rewinder Production</h1>
+  </div>
+  <div class="half-width">
+    <img src="./assets/download.jpg" style=" width: 200px; float: right;"/>
+  </div>
+</div>
+
+<div class="full-width">
+  <mat-form-field class="half-width">
+    <input matInput type="text" placeholder="Select Winder Lot" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" (onSelectionChange)="onWinderSelect(option)" [value]="option.winder_lot_id">
+        {{option.winder_lot_id}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="half-width" *ngIf="selectedWinder" style=" vertical-align: bottom;">
+    <mat-card>
+      <mat-card-title>Selected Winder is: {{ selectedWinder?.winder_lot_id }} </mat-card-title>
+    </mat-card>
+  </div>
+</div>
+
+<form [formGroup]="form" #formDirective="ngForm" name="myFrom" novalidate>
+  <!-- Section 1 -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>User details</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <div formGroupName="section_1">
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Prod Date" type="text" formControlName="prod_date">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Shift" type="text" formControlName="shift">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="User Id" type="text" formControlName="user_id">
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput readonly placeholder="Shift Engineer" type="text" formControlName="shift_engineer">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Rewinder No" type="text" formControlName="rewinder_no">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Winder lot query" type="text" formControlName="winder_lot_query">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Batch No" type="text" formControlName="batch_no">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Transaction type" type="text" formControlName="transaction_type">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <!-- Section 2 -->
+  <mat-card *ngIf="selectedWinder">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Winder details</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <div formGroupName="section_2">
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Winder Lot Id" type="text" formControlName="winder_lot_id">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Winder Item" type="text" formControlName="winder_item">
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Actual wt" type="text" formControlName="actual_wt">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="By Prod" type="text" formControlName="by_prod">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="By QC" type="text" formControlName="by_qc">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="DF code" type="text" formControlName="df_code">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="FD" type="text" formControlName="fd">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="MD" type="text" formControlName="md">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="BD" type="text" formControlName="bd">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Winder Item" type="text" formControlName="winder_item">
+        </mat-form-field>
+      </div>
+
+      <!-- <button (click)="add(form.valid, form.value)">Add</button> -->
+    </div>
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+  <!-- Add breaks start -->
+  <div *ngIf="selectedWinder && showAdd">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Add jumbo breaks</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <div formGroupName="section_3">
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Width" type="text" formControlName="width">
+            <small [hidden]="section_3.controls.width.valid || (section_3.controls.width.pristine && sec3Submited)">
+              Please enter the width.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Item Code" type="text" formControlName="item_code">
+            <small [hidden]="section_3.controls.item_code.valid || (section_3.controls.item_code.pristine && sec3Submited)">
+              Please enter the Item Code.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Destination" type="text" formControlName="destination">
+            <small [hidden]="section_3.controls.destination.valid || (section_3.controls.destination.pristine && sec3Submited)">
+              Please enter the Destination.
+            </small>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Dia" type="text" formControlName="dia">
+            <small [hidden]="section_3.controls.dia.valid || (section_3.controls.dia.pristine && sec3Submited)">
+              Please enter the Dia.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Weight" type="text" formControlName="weight">
+            <small [hidden]="section_3.controls.weight.valid || (section_3.controls.weight.pristine && sec3Submited)">
+              Please enter the Weight.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Q Chk" type="text" formControlName="qchk">
+            <small [hidden]="section_3.controls.qchk.valid || (section_3.controls.qchk.pristine && sec3Submited)">
+              Please enter the Qchk.
+            </small>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="QC Stat" type="text" formControlName="qcstat">
+            <small [hidden]="section_3.controls.qcstat.valid || (section_3.controls.qcstat.pristine && sec3Submited)">
+              Please enter the QC Stat.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="DF Code" type="text" formControlName="dfcode">
+            <small [hidden]="section_3.controls.dfcode.valid || (section_3.controls.dfcode.pristine && sec3Submited)">
+              Please enter the DF Code.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="QC Dest" type="text" formControlName="qc_dest">
+            <small [hidden]="section_3.controls.weight.valid || (section_3.controls.weight.pristine && sec3Submited)">
+              Please enter the Weight.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="FD" type="text" formControlName="fd">
+            <small [hidden]="section_3.controls.fd.valid || (section_3.controls.fd.pristine && sec3Submited)">
+              Please enter the FD.
+            </small>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="MD" type="text" formControlName="md">
+            <small [hidden]="section_3.controls.md.valid || (section_3.controls.md.pristine && sec3Submited)">
+              Please enter the MD.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="BD" type="text" formControlName="bd">
+            <small [hidden]="section_3.controls.bd.valid || (section_3.controls.bd.pristine && sec3Submited)">
+              Please enter the BD.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="LOT Numbet" type="text" formControlName="lot_number">
+            <small [hidden]="section_3.controls.lot_number.valid || (section_3.controls.lot_number.pristine && sec3Submited)">
+              Please enter the Lot number.
+            </small>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Remarks" type="text" formControlName="remarks">
+            <small [hidden]="section_3.controls.remarks.valid || (section_3.controls.remarks.pristine && sec3Submited)">
+              Please enter the Remarks.
+            </small>
+          </mat-form-field>
+        </div>
+
+        <div style="width: 100%; display: inline-block;">
+          <button color="warn" mat-raised-button (click)="showAdd=!showAdd">Cancel</button>
+          <button color="primary" mat-raised-button (click)="addBreaks()">Add Breaks</button>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+  <!-- Add breaks ends -->
+
+
+  <!-- Table starts -->''
+  <div *ngIf="selectedWinder && !showAdd">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Jumbo breaks details
+            <button mat-fab color="accent" (click)="showAdd=!showAdd">Add</button>
+          </h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <div *ngIf="selectedJumboBreaks">
+        <!-- <div *ngFor="let br of selectedJumboBreaks">
+        {{ br | json }}
+      </div> -->
+        <table>
+          <thead>
+            <tr>
+              <th>Width</th>
+              <th>Item Code</th>
+              <th>Destination</th>
+              <th>Dia</th>
+              <th>Weight</th>
+              <th>Qchk</th>
+              <th>QC Stat</th>
+              <th>DF Ccode</th>
+              <th>QC Dest</th>
+              <th>FD</th>
+              <th>MD</th>
+              <th>BD</th>
+              <th>Lot Number</th>
+              <th>Remarks</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngIf="selectedLot">
+              <ngx-barcode [bc-value]="selectedLot" [bc-display-value]="true" style="display: inline-block;"></ngx-barcode>
+              <button mat-fab color="warn" (click)="selectedLot=null" style="float: right; margin-top: 3%;">X</button>
+            </tr>
+            <tr *ngFor="let br of selectedJumboBreaks; let index=index;">
+              <td>{{ br?.width }} </td>
+              <td>{{ br?.item_code }} </td>
+              <td>{{ br?.destination }} </td>
+              <td>{{ br?.dia }} </td>
+              <td>{{ br?.weight }} </td>
+              <td>{{ br?.qchk }} </td>
+              <td>{{ br?.qcstat }} </td>
+              <td>{{ br?.dfcode }} </td>
+              <td>{{ br?.qc_dest }} </td>
+              <td>{{ br?.fd }} </td>
+              <td>{{ br?.md }} </td>
+              <td>{{ br?.bd }} </td>
+              <td>{{ br?.lot_number }} </td>
+              <td>{{ br?.remarks }} </td>
+              <td>
+                <button mat-fab color="accent" (click)="showBarCode(index,br?.lot_number)">|!|!</button>
+                <button mat-fab color="warn" (click)="delete(index,br?._id)">X</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-card>
+  </div>
+  <!-- table ends -->
+
+
+</form>

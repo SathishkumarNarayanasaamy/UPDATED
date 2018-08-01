@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" (submit)="login(loginForm.valid)">
+ 
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter email" formControlName="email"  id="email" >
+ <small [hidden]="loginForm.controls.email.valid || formValid"
+          style="color:red;">
+          Email is required.
+          </small> 
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" formControlName="password">
+      <small [hidden]="loginForm.controls.password.valid || formValid">Password is required.</small> 
+    <button type="submit">Login</button>
+   
+  </div>
+
+
+</form>

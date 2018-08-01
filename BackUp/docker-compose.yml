@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+    app-tier:
+      driver: bridge 
+
+services:
+  web:
+    build: ./angular_ui
+    ports:
+    - "4200:4200"
+    links:
+    - node
+  node:
+    build: ./node_api
+    ports: 
+      - "3000:3000"
+    links:
+      - mongodb
+    networks: 
+      - app-tier 
+  mongodb:
+    image: mongo:3.1 
+    volumes:
+      - ./usr/bin
+    ports:
+      - "27017:27017"  
+    networks:
+      - app-tier
